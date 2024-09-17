@@ -9,6 +9,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* Header Styles */
 header {
     position: relative;
     height: 60vh;
@@ -54,14 +55,31 @@ header p {
     font-size: 1.2em;
 }
 
-main .projects {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+/* Main Content Styles */
+main {
     padding: 40px 20px;
 }
 
-main .project {
+section {
+    max-width: 1000px;
+    margin: 0 auto 50px auto;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #333;
+}
+
+/* Projects Section */
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project {
     width: 300px;
     margin: 15px;
     text-align: center;
@@ -71,16 +89,55 @@ main .project {
     transition: transform 0.2s;
 }
 
-main .project:hover {
+.project:hover {
     transform: scale(1.05);
 }
 
-main .project img {
+.project img {
     width: 100%;
     height: auto;
 }
 
-main .project h3 {
+.project h3 {
     padding: 15px 0;
     background-color: #f8f8f8;
+}
+
+/* Skills Section */
+.skills ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skills li {
+    background-color: #eaeaea;
+    margin: 10px;
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-size: 1.1em;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+}
+
+footer .social-links {
+    text-align: center;
+}
+
+footer .social-links a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.2s;
+}
+
+footer .social-links a:hover {
+    color: #aaa;
 }
