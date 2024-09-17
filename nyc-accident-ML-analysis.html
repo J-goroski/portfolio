@@ -6,14 +6,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <a href="index.html">← Back to Portfolio</a>
-    </nav>
+    <!-- Header with interactive background and back button -->
+    <header>
+        <div class="overlay">
+            <!-- Back Button -->
+            <button onclick="window.location.href='index.html'" class="back-button">← Back to Portfolio</button>
+            <!-- Project Title -->
+            <h1>NYC Traffic Data Analysis Project</h1>
+        </div>
+    </header>
 
     <!-- Project Content -->
     <main class="project-detail">
-        <h1>NYC Traffic Data Analysis Project</h1>
         <p><strong>Date:</strong> [Project Date]</p>
         <p><strong>Tools Used:</strong> Python, Pandas, scikit-learn, Matplotlib, etc.</p>
 
@@ -34,7 +38,7 @@
             <p>
                 The first step involves cleaning the NYC traffic dataset to handle missing values, outliers, and inconsistencies. Key techniques used include imputing missing values, removing irrelevant features, and transforming data into a usable format.
             </p>
-            <!-- You can add an image here -->
+            <!-- Add an image here -->
             <!-- <img src="images/data-cleaning.png" alt="Data Cleaning Process"> -->
 
             <!-- Exploratory Data Analysis (EDA) -->
@@ -82,13 +86,13 @@
         <section>
             <h2>Additional Resources</h2>
             <ul>
-                <li><a href="https://github.com/yourusername/nyc-traffic-data-analysis" target="_blank">GitHub Repository</a></li>
+                <li><a href="https://github.com/J-goroski/nyc-traffic-data-analysis" target="_blank">GitHub Repository</a></li>
                 <li><a href="documents/nyc-traffic-data-report.pdf" target="_blank">Detailed Report (PDF)</a></li>
             </ul>
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer with Social Links -->
     <footer>
         <div class="social-links">
             <a href="https://github.com/J-goroski" target="_blank">GitHub</a>
