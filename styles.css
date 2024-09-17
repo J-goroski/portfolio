@@ -1,0 +1,86 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    position: relative;
+    height: 60vh;
+    overflow: hidden;
+    background: black;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, grey, black);
+    animation: animateBG 30s linear infinite;
+}
+
+@keyframes animateBG {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+header .overlay {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+main .projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+main .project {
+    width: 300px;
+    margin: 15px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+main .project:hover {
+    transform: scale(1.05);
+}
+
+main .project img {
+    width: 100%;
+    height: auto;
+}
+
+main .project h3 {
+    padding: 15px 0;
+    background-color: #f8f8f8;
+}
