@@ -1,18 +1,342 @@
-/* ... (Your existing styles) ... */
+/* Custom Font */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
 
-/* Footer Email Button Styles */
-footer .social-links button {
-    color: white;
-    background: none;
-    border: none;
-    font-size: 1.2em;
-    margin: 0 15px;
+/* CSS Variables for Theming */
+:root {
+    --primary-color: #007BFF;
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --secondary-color: #f9f9f9;
+}
+
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --secondary-color: #1e1e1e;
+}
+
+/* Reset Styles */
+* {
+    box-sizing: border-box;
+}
+
+/* Theme Toggle Switch */
+.theme-switch {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 200;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.theme-switch .slider {
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 15px;
+    position: relative;
     cursor: pointer;
 }
 
+.theme-switch .slider::before {
+    content: "";
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    background-color: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
+}
+
+.theme-switch input:checked + .slider::before {
+    transform: translateX(25px);
+}
+
+.theme-switch input:checked + .slider {
+    background-color: #66bb6a;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar li {
+    display: inline;
+}
+
+.navbar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+}
+
+/* Header Styles */
+header {
+    position: relative;
+    height: 60vh;
+    overflow: hidden;
+    background: black;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, grey, black);
+    animation: animateBG 30s linear infinite;
+}
+
+@keyframes animateBG {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+header .overlay {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+/* Main Content Styles */
+main {
+    padding: 40px 20px;
+}
+
+section {
+    max-width: 1000px;
+    margin: 0 auto 50px auto;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #333;
+}
+
+/* About Me Section */
+.about-me {
+    text-align: center;
+    padding: 0 20px;
+}
+
+.about-me p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Projects Section */
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project {
+    width: 300px;
+    margin: 15px;
+    text-align: center;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project img {
+    width: 100%;
+    height: auto;
+}
+
+.project h3 {
+    padding: 15px 0;
+    background-color: #f8f8f8;
+}
+
+/* Skills Section */
+.skills ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skills li {
+    background-color: #eaeaea;
+    margin: 10px;
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-size: 1.1em;
+}
+
+/* Testimonials Section */
+.testimonials {
+    background-color: var(--secondary-color);
+    padding: 50px 20px;
+}
+
+.testimonials h2 {
+    margin-bottom: 40px;
+}
+
+.testimonial-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.testimonial {
+    margin-bottom: 30px;
+}
+
+.testimonial p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.testimonial .author {
+    text-align: right;
+    font-style: italic;
+    color: #555;
+}
+
+/* Blog Section */
+.blog h2 {
+    margin-bottom: 30px;
+}
+
+.blog-list .blog-post {
+    margin-bottom: 30px;
+}
+
+.blog-list h3 {
+    font-size: 1.5em;
+}
+
+.blog-list p {
+    color: #555;
+}
+
+/* Contact Form Styles */
+.contact {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.contact input,
+.contact textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.contact button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.contact button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+}
+
+footer .social-links {
+    text-align: center;
+}
+
+footer .social-links a,
+footer .social-links button {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+footer .social-links a:hover,
 footer .social-links button:hover {
     color: #aaa;
     text-decoration: underline;
+}
+
+footer .social-links i {
+    margin-right: 8px;
+    font-size: 1.2em;
 }
 
 /* Modal Styles */
@@ -29,7 +353,7 @@ footer .social-links button:hover {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--background-color);
     margin: 15% auto; /* Center the modal */
     padding: 20px;
     border: 1px solid #888;
@@ -38,6 +362,7 @@ footer .social-links button:hover {
     text-align: center;
     border-radius: 10px;
     position: relative;
+    color: var(--text-color);
 }
 
 .close-button {
@@ -61,7 +386,7 @@ footer .social-links button:hover {
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
-    background-color: #007BFF;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 5px;
@@ -69,4 +394,89 @@ footer .social-links button:hover {
 
 #copy-button:hover {
     background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .project-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .project {
+        width: 90%;
+        margin: 15px 0;
+    }
+
+    .skills ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skills li {
+        width: 80%;
+        margin: 10px 0;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+    }
+
+    .navbar a {
+        padding: 10px;
+    }
+
+    .theme-switch {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* Accessibility Improvements */
+a,
+button {
+    outline: none;
+}
+
+a:focus,
+button:focus {
+    outline: 2px dashed var(--primary-color);
+    outline-offset: 4px;
+}
+
+/* Section Heading Animation */
+section h2 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Other Elements Animation */
+.project,
+.about-me p,
+.testimonial,
+.blog-post,
+.contact form {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+}
+
+.project {
+    animation-delay: 0.3s;
+}
+
+.about-me p,
+.testimonial,
+.blog-post,
+.contact form {
+    animation-delay: 0.4s;
 }
