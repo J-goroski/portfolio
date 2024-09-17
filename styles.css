@@ -1,143 +1,72 @@
-/* Reset Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ... (Your existing styles) ... */
 
-body {
-    font-family: Arial, sans-serif;
-}
-
-/* Header Styles */
-header {
-    position: relative;
-    height: 60vh;
-    overflow: hidden;
-    background: black;
-}
-
-header::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, grey, black);
-    animation: animateBG 30s linear infinite;
-}
-
-@keyframes animateBG {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-header .overlay {
-    position: relative;
-    z-index: 1;
+/* Footer Email Button Styles */
+footer .social-links button {
     color: white;
-    text-align: center;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-header h1 {
-    font-size: 3em;
-    margin-bottom: 0.5em;
-}
-
-header p {
+    background: none;
+    border: none;
     font-size: 1.2em;
-}
-
-/* Main Content Styles */
-main {
-    padding: 40px 20px;
-}
-
-section {
-    max-width: 1000px;
-    margin: 0 auto 50px auto;
-}
-
-section h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2em;
-    color: #333;
-}
-
-/* Projects Section */
-.project-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.project {
-    width: 300px;
-    margin: 15px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.2s;
-}
-
-.project:hover {
-    transform: scale(1.05);
-}
-
-.project img {
-    width: 100%;
-    height: auto;
-}
-
-.project h3 {
-    padding: 15px 0;
-    background-color: #f8f8f8;
-}
-
-/* Skills Section */
-.skills ul {
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.skills li {
-    background-color: #eaeaea;
-    margin: 10px;
-    padding: 15px 25px;
-    border-radius: 20px;
-    font-size: 1.1em;
-}
-
-/* Footer Styles */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-}
-
-footer .social-links {
-    text-align: center;
-}
-
-footer .social-links a {
-    color: white;
     margin: 0 15px;
-    text-decoration: none;
-    font-size: 1.2em;
-    transition: color 0.2s;
+    cursor: pointer;
 }
 
-footer .social-links a:hover {
+footer .social-links button:hover {
     color: #aaa;
+    text-decoration: underline;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* On top of other elements */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Center the modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+#copy-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#copy-button:hover {
+    background-color: #0056b3;
 }
