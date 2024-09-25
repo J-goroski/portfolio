@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>NYC Traffic Data Analysis Project</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Header with interactive background and back button -->
     <header>
         <div class="overlay">
             <!-- Back Button -->
-            <button onclick="window.location.href='index.html'" class="back-button">← Back to Portfolio</button>
+            <button onclick="window.location.href='./index.html'" class="back-button">← Back to Portfolio</button>
             <!-- Project Title -->
             <h1>NYC Traffic Data Analysis Project</h1>
         </div>
@@ -18,8 +19,8 @@
 
     <!-- Project Content -->
     <main class="project-detail">
-        <p><strong>Date:</strong> [Project Date]</p>
-        <p><strong>Tools Used:</strong> Python, Pandas, scikit-learn, Matplotlib, etc.</p>
+        <p><strong>Date:</strong> April 2024</p>
+        <p><strong>Tools Used:</strong> Python, Pandas, scikit-learn, Matplotlib, Pytorch, etc.</p>
 
         <!-- Project Overview -->
         <section>
@@ -39,7 +40,7 @@
                 The first step involves cleaning the NYC traffic dataset to handle missing values, outliers, and inconsistencies. Key techniques used include imputing missing values, removing irrelevant features, and transforming data into a usable format.
             </p>
             <!-- Add an image here -->
-            <!-- <img src="images/data-cleaning.png" alt="Data Cleaning Process"> -->
+            <img src="images/data-cleaning.png" alt="Data Cleaning Process">
 
             <!-- Exploratory Data Analysis (EDA) -->
             <h3>Exploratory Data Analysis (EDA)</h3>
@@ -47,7 +48,7 @@
                 EDA is used to understand the dataset and uncover patterns, correlations, and insights through visualizations and statistical analysis. This phase helps identify key traffic trends and relationships between variables such as time of day, location, weather, etc.
             </p>
             <!-- Add EDA visuals -->
-            <!-- <img src="images/eda-visualizations.png" alt="EDA Visualizations"> -->
+            <img src="images/eda-vis.png" alt="EDA Visualizations">
 
             <!-- Linear Regression Model -->
             <h3>Linear Regression Model</h3>
@@ -55,7 +56,7 @@
                 A linear regression model is used to establish a relationship between traffic volumes and other continuous variables. This model is useful for making simple, interpretable predictions. Key metrics like R-squared and Mean Squared Error (MSE) are used to evaluate model performance.
             </p>
             <!-- Add model performance chart -->
-            <!-- <img src="images/linear-regression-results.png" alt="Linear Regression Results"> -->
+            <img src="images/linear-regression-results.png" alt="Linear Regression Results">
 
             <!-- Random Forest Model -->
             <h3>Random Forest Model</h3>
@@ -63,7 +64,7 @@
                 A more complex Random Forest model is employed to capture non-linear patterns in the data and improve predictive accuracy. This model is particularly good at handling large datasets and capturing feature importance.
             </p>
             <!-- Add feature importance plot -->
-            <!-- <img src="images/random-forest-feature-importance.png" alt="Random Forest Feature Importance"> -->
+            <img src="images/random-forest-feature.png" alt="Random Forest Feature Importance">
 
             <!-- Neural Network Model -->
             <h3>Neural Network Model</h3>
@@ -71,14 +72,19 @@
                 A neural network model is developed to predict traffic flow with a more complex architecture that can capture deeper relationships within the dataset. Performance is measured using metrics like accuracy, precision, and recall.
             </p>
             <!-- Add neural network performance plot -->
-            <!-- <img src="images/neural-network-performance.png" alt="Neural Network Performance"> -->
+            <img src="images/neural-network-performance.png" alt="Neural Network Performance">
         </section>
 
         <!-- Conclusions and Findings -->
         <section>
             <h2>Conclusions and Findings</h2>
             <p>
-                Insights drawn from the models include factors most influencing NYC traffic and the accuracy of each model's performance. The project also discusses the limitations of the models and potential improvements for future work.
+                To predict the injury level of parties in an accident, the neural network slightly outdid the 
+                random forest model, with 85% vs. 82% accuracy, in predicting traffic accident outcomes. The neural 
+                network deep learning worked well at identifying complex patterns, while the random forest 
+                ensemble method offered robustness and visual layout . Both models could be improved by 
+                adjusting their complexity and incorporating more data. Linear regression lagged behind, showing 
+                that more sophisticated models are needed for this task
             </p>
         </section>
 
@@ -86,7 +92,7 @@
         <section>
             <h2>Additional Resources</h2>
             <ul>
-                <li><a href="https://github.com/J-goroski/nyc-traffic-data-analysis" target="_blank">GitHub Repository</a></li>
+                <li><a href="https://github.com/J-goroski/NYC_Accident_prediction_and_analysis" target="_blank">GitHub Repository</a></li>
                 <li><a href="documents/nyc-traffic-data-report.pdf" target="_blank">Detailed Report (PDF)</a></li>
             </ul>
         </section>
@@ -95,9 +101,9 @@
     <!-- Footer with Social Links -->
     <footer>
         <div class="social-links">
-            <a href="https://github.com/J-goroski" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank">LinkedIn</a>
-            <button id="email-button">Email</button>
+            <a href="https://github.com/J-goroski" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <button id="email-button"><i class="fas fa-envelope"></i> Email</button>
         </div>
     </footer>
 

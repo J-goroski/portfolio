@@ -9,37 +9,17 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Header Styles */
 header {
     position: relative;
     height: 60vh;
     overflow: hidden;
-    background: black;
+    background: grey; /* Change background to solid grey */
 }
 
-header::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, grey, black);
-    animation: animateBG 30s linear infinite;
-}
-
-@keyframes animateBG {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
+/* Ensure overlay text is on top */
 header .overlay {
     position: relative;
-    z-index: 1;
+    z-index: 2; /* Ensure overlay is above the canvas */
     color: white;
     text-align: center;
     top: 50%;
@@ -49,6 +29,18 @@ header .overlay {
 header h1 {
     font-size: 3em;
     margin-bottom: 0.5em;
+    position: relative;
+    z-index: 2; /* Ensure text is above the dots */
+}
+
+/* Canvas for floating dots */
+#dotCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure canvas is behind the overlay text */
 }
 
 /* Back Button Styles */
@@ -62,6 +54,7 @@ header h1 {
     font-size: 1em;
     cursor: pointer;
     font-weight: bold;
+    z-index: 10; /* Ensure the button is on top of other elements */
 }
 
 .back-button:hover {
@@ -134,32 +127,67 @@ header h1 {
 }
 
 /* Skills Section */
-.skills {
-    max-width: 800px;
+.skills-section {
+    text-align: center;
     margin: 50px auto;
-    padding: 0 20px;
 }
 
-.skills h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2em;
+.skills-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
     color: #333;
 }
 
-.skills ul {
-    list-style-type: none;
+.skills-wrapper {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 50px; /* Space between the two categories */
+}
+
+.skill-category {
+    text-align: left;
+}
+
+.skill-category h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.skills-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;  /* Flexbox for horizontal alignment */
+    flex-wrap: wrap; /* Allow wrapping if too many items */
+    gap: 10px;
     justify-content: center;
 }
 
-.skills li {
+.skills-list li {
     background-color: #eaeaea;
-    margin: 10px;
-    padding: 15px 25px;
+    padding: 10px 20px;
     border-radius: 20px;
     font-size: 1.1em;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+    .skills-wrapper {
+        flex-direction: column; /* Stack the categories on top of each other */
+    }
+
+    .skills-list {
+        flex-direction: column; /* Stack the skills vertically on smaller screens */
+        align-items: center;
+    }
+}
+
+
+.social-links i {
+    margin-right: 8px;
 }
 
 /* Project Detail Styles */
@@ -282,3 +310,24 @@ footer .social-links button:hover {
 #copy-button:hover {
     background-color: #0056b3;
 }
+
+/* Toggle Button for Dot Behavior */
+.toggle-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;  /* Move to bottom-left */
+    padding: 10px 15px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    z-index: 3; /* Ensure it stays on top of the canvas */
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: lightgray;
+}
+

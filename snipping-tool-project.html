@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NYC Traffic Data Analysis Project</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header with interactive background and back button -->
+    <header>
+        <div class="overlay">
+            <!-- Back Button -->
+            <button onclick="window.location.href='./index.html'" class="back-button">← Back to Portfolio</button>
+            <!-- Project Title -->
+            <h1>PNG Snipping Tool with Text Detection and Extraction</h1>
+        </div>
+    </header>
+
+    <!-- Project Content -->
+    <main class="project-detail">
+        <p><strong>Date:</strong> September 2024</p>
+        <p><strong>Tools Used:</strong> Python, OpenCV, EasyOCR, PyQt5</p>
+
+        <!-- Project Overview -->
+        <section>
+            <h2>Project Overview</h2>
+            <p>
+                This project provides a desktop tool built with PyQt5 that allows users to snip a portion of their screen and extract text from it using OCR (Optical Character Recognition). 
+                The application utilizes EasyOCR, OpenCV, and different image preprocessing techniques to maximize accuracy and versatility in text detection.
+            </p>
+            <img src="images/snip_gui.PNG" alt="Snipping Tool UI">
+
+        </section>
+
+        <!-- Project Workflow -->
+        <section>
+            <h2>Project Workflow</h2>
+
+            <!-- Image Snipping -->
+            <h3>Image Snipping</h3>
+            <p>
+                The snipping functionality allows users to select any part of the screen for text extraction. The captured image is then processed and converted into a format suitable for OCR.
+            </p>
+
+            <!-- OCR Processing Methods -->
+            <h3>OCR Processing Methods</h3>
+            <p>
+                Three methods are applied to extract text from the snipped images:
+                <ul>
+                    <li><strong>Method 1:</strong> Standard OCR with no additional preprocessing.</li>
+                    <li><strong>Method 2:</strong> Upscaled image for improved recognition of pixelated text.</li>
+                    <li><strong>Method 3:</strong> Advanced preprocessing, including thresholding and morphological transformations, to enhance text detection in challenging images.</li>
+                </ul>
+            </p>
+        </section>
+
+        <!-- Conclusions -->
+        <section>
+            <h2>Conclusions</h2>
+            <p>
+                The tool provides users with a powerful, easy-to-use interface to capture and extract text from images directly on their screen. It is ideal for quick data extraction from screenshots, especially for text-heavy content.
+            </p>
+        </section>
+
+        <!-- Additional Resources -->
+        <section>
+            <h2>Additional Resources</h2>
+            <ul>
+                <li><a href="https://github.com/J-goroski/Text-detection-Snipping-Tool" target="_blank">GitHub Repository</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer with Social Links -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/J-goroski" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <button id="email-button"><i class="fas fa-envelope"></i> Email</button>
+        </div>
+    </footer>
+
+    <!-- Email Pop-up Modal -->
+    <div id="email-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" aria-label="Close">&times;</span>
+            <p>My Email: <span id="email-address">jared.goroski@gmail.com</span></p>
+            <button id="copy-button">Copy Email</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
