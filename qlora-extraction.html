@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Filing Extraction (QLoRA) — Jared Goroski</title>
+  <meta name="description" content="QLoRA fine-tuning of Qwen2.5-7B with Unsloth for structured field extraction from SEC 10-K filings, exported to GGUF for local Ollama inference.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="detail-header">
+    <div class="wrap">
+      <a class="back-link" href="index.html">← Back to portfolio</a>
+      <h1>LLM Filing Extraction (QLoRA)</h1>
+      <p class="detail-sub">ML / LLM · Python, Unsloth, Ollama</p>
+    </div>
+  </div>
+
+  <main class="detail">
+    <h2>Overview</h2>
+    <p>A fine-tuning pipeline that adapts a small open model to pull structured fields out of
+       SEC 10-K filings. It fine-tunes Qwen2.5-7B with QLoRA (via Unsloth) and exports the result
+       to GGUF so it runs locally through Ollama — keeping the whole extraction workflow
+       offline and self-hosted.</p>
+
+    <h2>Pipeline</h2>
+    <h3>Data &amp; sync</h3>
+    <p>Built on an existing EDGAR sync module that retrieves and stages 10-K filings, providing
+       the source text the model learns to extract from.</p>
+
+    <h3>QLoRA fine-tuning</h3>
+    <p>Quantized low-rank adaptation (QLoRA) makes it possible to fine-tune a 7B model on modest
+       hardware by training small adapter weights over a quantized base — Unsloth handles the
+       training loop efficiently.</p>
+
+    <h3>Local export &amp; inference</h3>
+    <p>The tuned model is exported to GGUF and served through Ollama, so structured extraction
+       runs entirely on local infrastructure with no external API calls.</p>
+
+    <!-- TODO: add a sample extraction / before-after screenshot here -->
+    <div class="placeholder">[ screenshot placeholder — add a sample extraction output:
+       &lt;img src="images/qlora-extraction-sample.PNG" alt="Structured extraction example"&gt; ]</div>
+
+    <h2>Why it matters</h2>
+    <p>It's the same extraction problem that sits under reference-data intake — turning
+       unstructured filings into structured fields — approached as a self-hosted, reproducible
+       model rather than a paid API dependency.</p>
+
+    <h2>Resources</h2>
+    <ul>
+      <!-- TODO: replace # with the repo URL once the project is public -->
+      <li><a href="#" target="_blank" rel="noopener">GitHub repository</a> <span style="color:var(--faint)">(coming soon)</span></li>
+    </ul>
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/J-goroski" target="_blank" rel="noopener"><i class="fab fa-github"></i>GitHub</a>
+      <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i>LinkedIn</a>
+      <button id="email-button"><i class="fas fa-envelope"></i>Email</button>
+    </div>
+  </footer>
+
+  <div id="email-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close">&times;</span>
+      <p>Email: <span id="email-address">jared.goroski@gmail.com</span></p>
+      <button id="copy-button">Copy email</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

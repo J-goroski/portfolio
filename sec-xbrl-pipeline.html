@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEC EDGAR / XBRL Pipeline — Jared Goroski</title>
+  <meta name="description" content="A medallion-architecture financial-data pipeline over the US listing universe: dual-vendor pricing, OpenFIGI enrichment, SEC filings, and XBRL company facts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="detail-header">
+    <div class="wrap">
+      <a class="back-link" href="index.html">← Back to portfolio</a>
+      <h1>SEC EDGAR / XBRL Pipeline</h1>
+      <p class="detail-sub">Financial-data engineering · Python, SQLite</p>
+    </div>
+  </div>
+
+  <main class="detail">
+    <h2>Overview</h2>
+    <p>A multi-source equity-research data pipeline built on a medallion architecture
+       (Bronze / Silver / Gold) in SQLite. It assembles a coherent, queryable picture of the US
+       equity universe from several public and vendor sources, designed to run offline-first and
+       reproducibly rather than depending on a live cloud stack.</p>
+
+    <h2>Architecture</h2>
+    <h3>Bronze — raw ingestion</h3>
+    <p>Raw pulls land untouched: the US listing universe, end-of-day pricing from two vendors
+       (yFinance and Polygon.io), the SEC EDGAR filing index, and XBRL company facts.</p>
+
+    <h3>Silver — cleaned &amp; conformed</h3>
+    <p>Raw sources are standardized and cross-referenced — including OpenFIGI enrichment to tie
+       securities together across identifier systems (CIK / CUSIP / ISIN / FIGI).</p>
+
+    <h3>Gold — analysis-ready</h3>
+    <p>Conformed data is shaped into the tables an equity-research workflow actually queries,
+       so downstream analysis reads from one clean layer.</p>
+
+    <h2>Why dual-vendor</h2>
+    <p>Pricing is ingested from two independent vendors so values can be cross-validated against
+       each other — the same multi-vendor validation discipline that matters in production
+       reference-data work.</p>
+
+    <!-- TODO: add an architecture diagram screenshot here -->
+    <div class="placeholder">[ screenshot placeholder — add a medallion architecture diagram:
+       &lt;img src="images/sec-pipeline-architecture.PNG" alt="Bronze/Silver/Gold architecture"&gt; ]</div>
+
+    <h2>Resources</h2>
+    <ul>
+      <!-- TODO: replace # with the repo URL once the pipeline is public -->
+      <li><a href="#" target="_blank" rel="noopener">GitHub repository</a> <span style="color:var(--faint)">(coming soon)</span></li>
+    </ul>
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/J-goroski" target="_blank" rel="noopener"><i class="fab fa-github"></i>GitHub</a>
+      <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i>LinkedIn</a>
+      <button id="email-button"><i class="fas fa-envelope"></i>Email</button>
+    </div>
+  </footer>
+
+  <div id="email-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close">&times;</span>
+      <p>Email: <span id="email-address">jared.goroski@gmail.com</span></p>
+      <button id="copy-button">Copy email</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

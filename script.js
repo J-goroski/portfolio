@@ -1,159 +1,159 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Modal and email clipboard functionality (unchanged)
-    var modal = document.getElementById("email-modal");
+/* ============================================================
+   Jared Goroski — portfolio
+   Signature: an ambient "index constituent" field.
+   Points carry a score (vertical position). A threshold drifts
+   slowly; a buffer BAND around it gives membership hysteresis —
+   a point must clear the UPPER edge to enter the index and fall
+   below the LOWER edge to leave. Amber = in index, dim = out.
+   This is the banding/buffer rule from index_engine, made visible.
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* ---------- email modal (shared across pages) ---------- */
+  var modal = document.getElementById("email-modal");
+  if (modal) {
     var emailButton = document.getElementById("email-button");
-    var closeButton = document.getElementsByClassName("close-button")[0];
-    var copyButton = document.getElementById("copy-button");
-    var emailAddress = document.getElementById("email-address").innerText;
+    var closeButton = document.querySelector(".close-button");
+    var copyButton  = document.getElementById("copy-button");
+    var emailText   = document.getElementById("email-address").innerText;
 
-    emailButton.onclick = function() {
-        modal.style.display = "block";
-    };
-
-    closeButton.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
-
-    copyButton.onclick = function() {
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(emailAddress).then(function() {
-                alert("Email address copied to clipboard!");
-            }, function(err) {
-                console.error('Could not copy text: ', err);
-            });
-        } else {
-            var tempInput = document.createElement("textarea");
-            tempInput.value = emailAddress;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            tempInput.setSelectionRange(0, 99999);
-            try {
-                var successful = document.execCommand('copy');
-                var msg = successful ? 'Email address copied to clipboard!' : 'Unable to copy';
-                alert(msg);
-            } catch (err) {
-                console.error('Fallback: Oops, unable to copy', err);
-            }
-            document.body.removeChild(tempInput);
-        }
-    };
-
-    // Canvas for the floating dots
-    const canvas = document.getElementById('dotCanvas');
-    const ctx = canvas.getContext('2d');
-    let dots = [];
-    const mouse = { x: null, y: null };
-    let dotCount = 100; // Default number of dots
-    let repelMode = true; // Start with "Push" mode (drift away)
-
-    // Resize canvas to fill the header
-    canvas.width = window.innerWidth;
-    canvas.height = document.querySelector('header').offsetHeight;
-
-    window.addEventListener('resize', function () {
-        canvas.width = window.innerWidth;
-        canvas.height = document.querySelector('header').offsetHeight;
+    emailButton.onclick = function () { modal.style.display = "block"; };
+    closeButton.onclick = function () { modal.style.display = "none"; };
+    window.addEventListener("click", function (e) {
+      if (e.target === modal) modal.style.display = "none";
+    });
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") modal.style.display = "none";
     });
 
-    // Track mouse position
-    window.addEventListener('mousemove', function (event) {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = event.clientX - rect.left;
-        mouse.y = event.clientY - rect.top;
-    });
-
-    window.addEventListener('mouseout', function () {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
-    // Create dots
-    function createDots(count) {
-        dots = [];
-        for (let i = 0; i < count; i++) {
-            dots.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                dx: (Math.random() - 0.5) * 2,
-                dy: (Math.random() - 0.5) * 2,
-                radius: Math.random() * 3 + 1,
-            });
-        }
-    }
-    createDots(dotCount); // Initialize with default dot count
-
-    function drawDots() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        for (let i = 0; i < dots.length; i++) {
-            const dot = dots[i];
-
-            // Draw each dot
-            ctx.beginPath();
-            ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2, false);
-            ctx.fillStyle = 'black';
-            ctx.fill();
-
-            // Move the dots
-            dot.x += dot.dx;
-            dot.y += dot.dy;
-
-            // Bounce off the walls
-            if (dot.x + dot.radius > canvas.width || dot.x - dot.radius < 0) {
-                dot.dx = -dot.dx;
-            }
-
-            if (dot.y + dot.radius > canvas.height || dot.y - dot.radius < 0) {
-                dot.dy = -dot.dy;
-            }
-
-            // Repel or attract dots to/from the mouse
-            if (mouse.x && mouse.y) {
-                const dx = mouse.x - dot.x;
-                const dy = mouse.y - dot.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 100) {
-                    const angle = Math.atan2(dy, dx);
-                    const moveX = Math.cos(angle) * 2;
-                    const moveY = Math.sin(angle) * 2;
-
-                    if (repelMode) {
-                        // Drift away from the mouse
-                        dot.x -= moveX;
-                        dot.y -= moveY;
-                    } else {
-                        // Move toward the mouse
-                        dot.x += moveX;
-                        dot.y += moveY;
-                    }
-                }
-            }
-        }
-
-        requestAnimationFrame(drawDots);  // Keep drawing the dots
-    }
-
-    // Start the animation
-    drawDots();
-
-    // Toggle drift behavior when button is clicked
-    const toggleButton = document.getElementById("toggle-drift");
-    toggleButton.onclick = function() {
-        repelMode = !repelMode;
-        toggleButton.textContent = repelMode ? "Push" : "Pull";
+    copyButton.onclick = function () {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(emailText).then(
+          function () { copyButton.textContent = "Copied"; },
+          function () { copyButton.textContent = "Copy failed"; }
+        );
+      } else {
+        var t = document.createElement("textarea");
+        t.value = emailText; document.body.appendChild(t); t.select();
+        try { document.execCommand("copy"); copyButton.textContent = "Copied"; }
+        catch (err) { copyButton.textContent = "Copy failed"; }
+        document.body.removeChild(t);
+      }
+      setTimeout(function () { copyButton.textContent = "Copy email"; }, 1600);
     };
+  }
 
-    function setDotCount(newCount) {
-        dotCount = newCount;
-        createDots(dotCount);  // Recreate dots with new count
+  /* ---------- constituent field (home hero only) ---------- */
+  var canvas = document.getElementById("indexCanvas");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+
+  var COLORS = {
+    in:   "#E0A93B",
+    out:  "#5A6478",
+    band: "rgba(224,169,59,0.10)",
+    line: "rgba(224,169,59,0.35)"
+  };
+
+  var BAND = 0.07;            // half-width of the buffer band (in score units)
+  var points = [];
+  var COUNT = 0;
+  var threshold = 0.5;
+  var tPhase = Math.random() * Math.PI * 2;
+  var W = 0, H = 0;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function size() {
+    var header = document.querySelector(".hero");
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = header ? header.offsetHeight : window.innerHeight;
+    COUNT = Math.min(260, Math.max(90, Math.floor(W / 7)));
+    seed();
+  }
+
+  function seed() {
+    points = [];
+    for (var i = 0; i < COUNT; i++) {
+      var score = Math.random();
+      points.push({
+        x: Math.random() * W,
+        vx: (Math.random() - 0.5) * 0.25,
+        score: score,
+        vs: (Math.random() - 0.5) * 0.0016,
+        inIndex: score > threshold,
+        flash: 0
+      });
     }
+  }
 
-    setDotCount(256);
+  function step() {
+    // threshold drifts slowly (a slow "reconstitution" cycle)
+    tPhase += 0.0016;
+    threshold = 0.5 + Math.sin(tPhase) * 0.12;
+
+    var upper = threshold + BAND;
+    var lower = threshold - BAND;
+
+    for (var i = 0; i < points.length; i++) {
+      var p = points[i];
+
+      // horizontal drift, wrap around
+      p.x += p.vx;
+      if (p.x < -4) p.x = W + 4;
+      if (p.x > W + 4) p.x = -4;
+
+      // score random walk, gently reflected at edges
+      p.score += p.vs;
+      if (p.score < 0.02) { p.score = 0.02; p.vs = Math.abs(p.vs); }
+      if (p.score > 0.98) { p.score = 0.98; p.vs = -Math.abs(p.vs); }
+      if (Math.random() < 0.01) p.vs += (Math.random() - 0.5) * 0.0008;
+      p.vs = Math.max(-0.0026, Math.min(0.0026, p.vs));
+
+      // hysteresis: enter only above upper edge, exit only below lower edge
+      if (!p.inIndex && p.score > upper) { p.inIndex = true;  p.flash = 1; }
+      else if (p.inIndex && p.score < lower) { p.inIndex = false; p.flash = 1; }
+
+      if (p.flash > 0) p.flash -= 0.02;
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    var yUpper = (1 - (threshold + BAND)) * H;
+    var yLower = (1 - (threshold - BAND)) * H;
+
+    // buffer band
+    ctx.fillStyle = COLORS.band;
+    ctx.fillRect(0, yUpper, W, yLower - yUpper);
+    ctx.strokeStyle = COLORS.line;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, yUpper); ctx.lineTo(W, yUpper); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, yLower); ctx.lineTo(W, yLower); ctx.stroke();
+
+    for (var i = 0; i < points.length; i++) {
+      var p = points[i];
+      var y = (1 - p.score) * H;
+      var base = p.inIndex ? 2.4 : 1.4;
+      var r = base + (p.flash > 0 ? p.flash * 2.4 : 0);
+
+      ctx.beginPath();
+      ctx.arc(p.x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = p.inIndex ? COLORS.in : COLORS.out;
+      ctx.globalAlpha = p.inIndex ? 0.9 : 0.5;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function loop() { step(); draw(); requestAnimationFrame(loop); }
+
+  size();
+  window.addEventListener("resize", size);
+
+  if (reduceMotion) {
+    draw();           // single static frame, no animation
+  } else {
+    loop();
+  }
 });

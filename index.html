@@ -1,101 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Jared Goroski Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jared Goroski — Data Scientist, FTSE Russell / LSEG</title>
+  <meta name="description" content="Data scientist on FTSE Russell's equity index data team. Index methodology, reference-data automation, and financial-data engineering — SEC EDGAR/XBRL, a rules-based index engine, and local LLM tooling.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header with interactive background and title -->
-    <header>
-        <div class="overlay">
-            <h1>Jared G Portfolio</h1>
-        </div>
-        <canvas id="dotCanvas"></canvas>
-        <!-- Button to toggle dot behavior in the bottom-left corner -->
-        <button id="toggle-drift" class="toggle-button">Push</button>
-    </header>
-    
-
-    <!-- About Me Section -->
-    <section class="about-me">
-        <h2>About Me</h2>
-        <p>
-            <!-- Write your about me text here -->
-            I’m a recent graduate with a B.S. in Data Science, passionate about uncovering insights from complex datasets. With experience in Python, database engineering, machine learning, and data visualization, I am driven to solve real-world problems using data-driven solutions.
-        </p>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects">
-        <h2>Projects</h2>
-        <div class="project-list">
-            <!-- NYC Accident Analysis Project -->
-            <div class="project">
-                <a href="nyc-accident-ml-analysis.html">
-                    <img src="images/nyc-thumb.PNG" alt="NYC Accident Analysis Project Thumbnail">
-                    <h3>NYC Accident Analysis and ML Prediction</h3>
-                </a>
-            </div>
-            <!-- Add more project blocks as needed -->
-            <div class="project">
-                <a href="snipping-tool-project.html">
-                    <img src="images/snipping-tool-thumb.PNG" alt="Snipping Tool Project Thumbnail">
-                    <h3>Snipping Tool with Text Extraction</h3>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills & Strengths Section -->
-    <section class="skills-section">
-        <h2>Skills & Strengths</h2>
-        <div class="skills-wrapper">
-            <div class="skill-category">
-                <h3>Programming Languages</h3>
-                <ul class="skills-list">
-                    <li>Python</li>
-                    <li>R</li>
-                    <li>C++</li>
-                    <li>SQL</li>
-                    <li>JavaScript</li>
-                    <li>Java</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>Other Skills</h3>
-                <ul class="skills-list">
-                    <li>Data Engineering</li>
-                    <li>MSSQL Developer</li>
-                    <li>Machine Learning</li>
-                    <li>Data Visualization</li>
-                    <li>Statistical Analysis</li>
-                    <li>Project Management</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer with Social Links -->
-    <footer>
-        <div class="social-links">
-            <a href="https://github.com/J-goroski" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <button id="email-button"><i class="fas fa-envelope"></i> Email</button>
-        </div>
-    </footer>
-
-    <!-- Email Pop-up Modal -->
-    <div id="email-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" aria-label="Close">&times;</span>
-            <p>My Email: <span id="email-address">jared.goroski@gmail.com</span></p>
-            <button id="copy-button">Copy Email</button>
-        </div>
+  <!-- ============ HERO: index-constituent field ============ -->
+  <header class="hero">
+    <canvas id="indexCanvas"></canvas>
+    <div class="legend" aria-hidden="true">
+      <span><span class="dot in"></span> in index</span>
+      <span><span class="dot out"></span> out</span>
     </div>
+    <div class="hero-inner">
+      <p class="eyebrow">Data Scientist · FTSE Russell / LSEG</p>
+      <h1>Jared Goroski</h1>
+      <p class="lede">I build and maintain the data behind equity indices — methodology,
+        reference data, and the pipelines that keep a multi-thousand-name universe accurate.</p>
+      <div class="hero-meta">
+        <span><b>~5,600</b> monitored equities</span>
+        <span><b>~70,000</b> reference universe</span>
+        <span><b>FTSE Russell</b> equity index data team</span>
+      </div>
+    </div>
+  </header>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+  <main class="wrap">
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about">
+      <p class="eyebrow">About</p>
+      <h2 class="section-title">What I work on</h2>
+      <p>I'm a data scientist on <strong>FTSE Russell's equity index data team</strong> at the
+        London Stock Exchange Group, working on index methodology, reference-data automation,
+        and multi-vendor data validation across the Russell equity universe. Day to day that
+        means maintaining researched attributes and index factors, rebuilding monthly
+        maintenance processes, and improving how a large equity universe is queried and kept clean.</p>
+      <p>Outside of work I build <strong>production-grade financial-data systems</strong> — a
+        rules-based index construction engine, SEC EDGAR/XBRL ingestion pipelines, and local
+        LLM tooling for filing extraction. I favor offline-first, reproducible, well-tested
+        systems over anything that only runs once.</p>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="projects" id="projects">
+      <p class="eyebrow">Projects</p>
+      <h2 class="section-title">Selected work</h2>
+      <div class="project-grid">
+
+        <!-- index_engine -->
+        <article class="card draft">
+          <p class="card-eyebrow">Index methodology</p>
+          <h3><a href="index_engine.html">index_engine</a></h3>
+          <p>A from-scratch equity index construction engine: periodic reconstitution,
+             float-adjusted market-cap weighting, and banding/buffer rules, validated by a
+             27-test suite. A banding study quantifies the turnover/stability tradeoff that
+             index methodology exists to manage.</p>
+          <div class="metric">Widening the reconstitution band 0% → 10% cut annualized
+             one-way turnover ~25% (relative).</div>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">pytest</span>
+            <span class="tag">index methodology</span>
+          </div>
+          <a class="card-link" href="index_engine.html">View details →</a>
+        </article>
+
+        <!-- SEC EDGAR / XBRL pipeline -->
+        <article class="card draft">
+          <p class="card-eyebrow">Financial-data engineering</p>
+          <h3><a href="sec-xbrl-pipeline.html">SEC EDGAR / XBRL Pipeline</a></h3>
+          <p>A medallion-architecture (Bronze / Silver / Gold) pipeline over the US listing
+             universe: dual-vendor EOD pricing, OpenFIGI enrichment, a SEC filing index, and
+             XBRL company facts — offline-first in SQLite.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQLite</span>
+            <span class="tag">SEC EDGAR</span>
+            <span class="tag">XBRL</span>
+          </div>
+          <a class="card-link" href="sec-xbrl-pipeline.html">View details →</a>
+        </article>
+
+        <!-- QLoRA extraction -->
+        <article class="card draft">
+          <p class="card-eyebrow">ML / LLM</p>
+          <h3><a href="qlora-extraction.html">LLM Filing Extraction (QLoRA)</a></h3>
+          <p>QLoRA fine-tuning of Qwen2.5-7B with Unsloth for structured field extraction from
+             SEC 10-K filings, exported to GGUF for local Ollama inference — built on an
+             existing EDGAR sync module.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">QLoRA</span>
+            <span class="tag">Unsloth</span>
+            <span class="tag">Ollama</span>
+          </div>
+          <a class="card-link" href="qlora-extraction.html">View details →</a>
+        </article>
+
+        <!-- NYC accident analysis (kept) -->
+        <article class="card">
+          <p class="card-eyebrow">Machine learning</p>
+          <h3><a href="nyc-accident-ml-analysis.html">NYC Accident Analysis &amp; ML Prediction</a></h3>
+          <p>Predicting traffic-injury outcomes on a 6.5M-row NYC OpenData set (refined to
+             850k). Compared linear regression, random forest, and a neural network — the
+             network edged out the forest at 85% vs. 82% accuracy.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">Tableau</span>
+          </div>
+          <a class="card-link" href="nyc-accident-ml-analysis.html">View details →</a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="skills" id="skills">
+      <p class="eyebrow">Skills</p>
+      <h2 class="section-title">Tools &amp; domains</h2>
+
+      <div class="skill-cluster">
+        <h3>Financial Data &amp; Indices</h3>
+        <div class="chips">
+          <span class="chip">Equity index data</span>
+          <span class="chip">FTSE Russell methodology</span>
+          <span class="chip">Float-adjusted market-cap weighting</span>
+          <span class="chip">Index reconstitution</span>
+          <span class="chip">Banding / buffer rules</span>
+          <span class="chip">Reference data</span>
+          <span class="chip">Free float</span>
+          <span class="chip">Multi-vendor validation</span>
+          <span class="chip">SEC EDGAR / XBRL</span>
+          <span class="chip">CIK / CUSIP / ISIN / FIGI</span>
+        </div>
+      </div>
+
+      <div class="skill-cluster">
+        <h3>Data Engineering</h3>
+        <div class="chips">
+          <span class="chip">MSSQL</span>
+          <span class="chip">Medallion architecture</span>
+          <span class="chip">ETL pipelines</span>
+          <span class="chip">Web scraping</span>
+          <span class="chip">Vendor APIs</span>
+          <span class="chip">PySpark</span>
+          <span class="chip">Data quality &amp; validation</span>
+        </div>
+      </div>
+
+      <div class="skill-cluster">
+        <h3>ML / LLM</h3>
+        <div class="chips">
+          <span class="chip">PyTorch</span>
+          <span class="chip">QLoRA fine-tuning</span>
+          <span class="chip">Unsloth</span>
+          <span class="chip">Ollama</span>
+          <span class="chip">Structured extraction</span>
+        </div>
+      </div>
+
+      <div class="skill-cluster">
+        <h3>Languages &amp; Tools</h3>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+          <span class="chip">R</span>
+          <span class="chip">C++</span>
+          <span class="chip">Java</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Git</span>
+          <span class="chip">PowerApps</span>
+          <span class="chip">Tableau</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/J-goroski" target="_blank" rel="noopener"><i class="fab fa-github"></i>GitHub</a>
+      <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i>LinkedIn</a>
+      <button id="email-button"><i class="fas fa-envelope"></i>Email</button>
+    </div>
+  </footer>
+
+  <!-- email modal -->
+  <div id="email-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close">&times;</span>
+      <p>Email: <span id="email-address">jared.goroski@gmail.com</span></p>
+      <button id="copy-button">Copy email</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

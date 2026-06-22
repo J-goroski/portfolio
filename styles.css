@@ -1,333 +1,395 @@
-/* Reset Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ============================================================
+   Jared Goroski — portfolio
+   Dark-minimal. Deep navy base, single amber signal accent.
+   Type: Space Grotesk (display) / Inter (body) / JetBrains Mono (data)
+   ============================================================ */
+
+:root {
+  --bg:        #0B0E14;  /* deep navy-black */
+  --surface:   #131926;  /* panels */
+  --surface-2: #1A2233;  /* raised panels / hover */
+  --border:    #28324A;  /* hairlines */
+  --text:      #E6EAF2;  /* primary */
+  --muted:     #8B95A7;  /* secondary */
+  --faint:     #5A6478;  /* tertiary / out-of-index */
+  --accent:    #E0A93B;  /* amber — "in index" signal */
+  --accent-dim:#8A6B26;
+  --link:      #6FA0F0;  /* interactive text */
+
+  --maxw: 980px;
+  --r: 10px;
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
-    font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-header {
-    position: relative;
-    height: 60vh;
-    overflow: hidden;
-    background: grey; /* Change background to solid grey */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+::selection { background: var(--accent); color: #0B0E14; }
+
+/* ---------- shared layout ---------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+.eyebrow {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
-/* Ensure overlay text is on top */
-header .overlay {
-    position: relative;
-    z-index: 2; /* Ensure overlay is above the canvas */
-    color: white;
-    text-align: center;
-    top: 50%;
-    transform: translateY(-50%);
+section { padding: 72px 0; border-top: 1px solid var(--border); }
+section:first-of-type { border-top: none; }
+
+h2.section-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  color: var(--text);
 }
 
-header h1 {
-    font-size: 3em;
-    margin-bottom: 0.5em;
-    position: relative;
-    z-index: 2; /* Ensure text is above the dots */
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-top: none;
+  padding: 0;
 }
 
-/* Canvas for floating dots */
-#dotCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; /* Ensure canvas is behind the overlay text */
+#indexCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-/* Back Button Styles */
-.back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    font-weight: bold;
-    z-index: 10; /* Ensure the button is on top of other elements */
+/* gradient so text stays legible over the field */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg,
+    rgba(11,14,20,0.45) 0%,
+    rgba(11,14,20,0.10) 40%,
+    rgba(11,14,20,0.82) 100%);
+  pointer-events: none;
 }
 
-.back-button:hover {
-    text-decoration: underline;
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px 64px;
 }
 
-/* About Me Section */
-.about-me {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 0 20px;
+.hero h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 14px 0 16px;
 }
 
-.about-me h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2em;
-    color: #333;
+.hero .lede {
+  max-width: 52ch;
+  font-size: 1.08rem;
+  color: var(--muted);
 }
 
-.about-me p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #555;
-    text-align: center;
+.hero-meta {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+.hero-meta b { color: var(--text); font-weight: 500; }
+
+/* legend for the constituent field */
+.legend {
+  position: absolute;
+  z-index: 3;
+  top: 20px; right: 24px;
+  display: flex; gap: 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend .dot { width: 8px; height: 8px; border-radius: 50%; }
+.legend .in  { background: var(--accent); }
+.legend .out { background: var(--faint); }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about p {
+  max-width: 64ch;
+  font-size: 1.08rem;
+  color: var(--muted);
+}
+.about p + p { margin-top: 16px; }
+.about strong { color: var(--text); font-weight: 600; }
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
 }
 
-/* Projects Section */
-.projects {
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 0 20px;
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+.card:hover {
+  border-color: var(--accent);
+  background: var(--surface-2);
+  transform: translateY(-3px);
 }
 
-.projects h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2em;
-    color: #333;
+.card-eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 10px;
 }
 
-.project-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.card h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.18rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.card h3 a { color: var(--text); }
+.card h3 a:hover { color: var(--accent); text-decoration: none; }
+
+.card p { color: var(--muted); font-size: 0.95rem; flex-grow: 1; }
+
+.metric {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-left: 2px solid var(--accent);
+  background: rgba(224,169,59,0.06);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--text);
+  border-radius: 0 6px 6px 0;
 }
 
-.project {
-    width: 300px;
-    margin: 15px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.2s;
+.tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 7px; }
+.tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 3px 8px;
 }
 
-.project:hover {
-    transform: scale(1.05);
+.card-link {
+  margin-top: 18px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+.card:hover .card-link { text-decoration: underline; }
+
+.draft { opacity: 0.92; }
+.draft .card-eyebrow::after {
+  content: " · in progress";
+  color: var(--accent-dim);
 }
 
-.project img {
-    width: 100%;
-    height: auto;
+/* ============================================================
+   SKILLS
+   ============================================================ */
+.skill-cluster { margin-bottom: 26px; }
+.skill-cluster:last-child { margin-bottom: 0; }
+.skill-cluster h3 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.86rem;
+  color: var(--text);
 }
 
-.project h3 {
-    padding: 15px 0;
-    background-color: #f8f8f8;
+/* ============================================================
+   PROJECT DETAIL PAGES
+   ============================================================ */
+.detail-header {
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0 32px;
+}
+.back-link {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.detail-header h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-top: 16px;
+}
+.detail-sub {
+  margin-top: 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--faint);
 }
 
-/* Skills Section */
-.skills-section {
-    text-align: center;
-    margin: 50px auto;
+.detail { max-width: 760px; margin: 0 auto; padding: 8px 24px 80px; }
+.detail h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 40px 0 12px;
+}
+.detail h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 26px 0 8px;
+}
+.detail p { color: var(--muted); margin-bottom: 14px; }
+.detail ul { color: var(--muted); margin: 0 0 16px 22px; }
+.detail li { margin-bottom: 6px; }
+.detail img {
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 18px 0;
 }
 
-.skills-section h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #333;
+/* placeholder block for not-yet-added screenshots */
+.placeholder {
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  color: var(--faint);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  margin: 18px 0;
 }
 
-.skills-wrapper {
-    display: flex;
-    justify-content: space-around;
-    gap: 50px; /* Space between the two categories */
-}
-
-.skill-category {
-    text-align: left;
-}
-
-.skill-category h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #333;
-}
-
-.skills-list {
-    list-style-type: none;
-    padding: 0;
-    display: flex;  /* Flexbox for horizontal alignment */
-    flex-wrap: wrap; /* Allow wrapping if too many items */
-    gap: 10px;
-    justify-content: center;
-}
-
-.skills-list li {
-    background-color: #eaeaea;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 1.1em;
-    display: inline-block;
-    text-align: center;
-}
-
-/* Responsive for smaller screens */
-@media (max-width: 768px) {
-    .skills-wrapper {
-        flex-direction: column; /* Stack the categories on top of each other */
-    }
-
-    .skills-list {
-        flex-direction: column; /* Stack the skills vertically on smaller screens */
-        align-items: center;
-    }
-}
-
-
-.social-links i {
-    margin-right: 8px;
-}
-
-/* Project Detail Styles */
-.project-detail {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 0 20px;
-}
-
-.project-detail h2 {
-    margin-top: 40px;
-    font-size: 1.8em;
-    color: #333;
-}
-
-.project-detail h3 {
-    margin-top: 30px;
-    font-size: 1.5em;
-    color: #555;
-}
-
-.project-detail p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.project-detail ul {
-    list-style-type: disc;
-    margin-left: 20px;
-}
-
-.project-detail img {
-    max-width: 100%;
-    height: auto;
-    margin: 20px 0;
-}
-
-/* Footer Styles */
+/* ============================================================
+   FOOTER + MODAL
+   ============================================================ */
 footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
+  border-top: 1px solid var(--border);
+  padding: 30px 0;
 }
-
-footer .social-links {
-    text-align: center;
+.social-links {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
 }
-
-footer .social-links a,
-footer .social-links button {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-    font-size: 1.2em;
-    cursor: pointer;
-    background: none;
-    border: none;
+.social-links a, .social-links button {
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
 }
+.social-links a:hover, .social-links button:hover { color: var(--accent); text-decoration: none; }
+.social-links i { margin-right: 7px; }
 
-footer .social-links a:hover,
-footer .social-links button:hover {
-    color: #aaa;
-    text-decoration: underline;
-}
-
-/* Modal Styles */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000; /* On top of other elements */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  display: none;
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.6);
 }
-
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* Center the modal */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
-    border-radius: 10px;
-    position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  max-width: 380px;
+  margin: 18vh auto 0;
+  padding: 28px;
+  border-radius: var(--r);
+  text-align: center;
+  position: relative;
 }
-
+.modal-content p { color: var(--muted); }
+.modal-content #email-address { color: var(--text); font-family: "JetBrains Mono", monospace; }
 .close-button {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+  position: absolute; top: 10px; right: 16px;
+  color: var(--faint); font-size: 26px; cursor: pointer; line-height: 1;
 }
-
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
-}
-
+.close-button:hover { color: var(--text); }
 #copy-button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
+  margin-top: 16px; padding: 9px 18px;
+  background: var(--accent); color: #0B0E14;
+  border: none; border-radius: 6px; cursor: pointer;
+  font-weight: 600;
+}
+#copy-button:hover { filter: brightness(1.08); }
+
+/* ============================================================
+   ACCESSIBILITY + RESPONSIVE
+   ============================================================ */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-#copy-button:hover {
-    background-color: #0056b3;
+@media (max-width: 720px) {
+  .project-grid { grid-template-columns: 1fr; }
+  section { padding: 56px 0; }
+  .legend { display: none; }
 }
 
-/* Toggle Button for Dot Behavior */
-.toggle-button {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;  /* Move to bottom-left */
-    padding: 10px 15px;
-    background-color: white;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    z-index: 3; /* Ensure it stays on top of the canvas */
-    transition: background-color 0.3s ease;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
-
-.toggle-button:hover {
-    background-color: lightgray;
-}
-

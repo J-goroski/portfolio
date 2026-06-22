@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index_engine — Jared Goroski</title>
+  <meta name="description" content="A rules-based equity index construction engine: reconstitution, float-adjusted market-cap weighting, and banding/buffer rules, with a banding turnover study.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="detail-header">
+    <div class="wrap">
+      <a class="back-link" href="index.html">← Back to portfolio</a>
+      <h1>index_engine</h1>
+      <p class="detail-sub">Rules-based equity index engine · Python, pytest</p>
+    </div>
+  </div>
+
+  <main class="detail">
+    <h2>Overview</h2>
+    <p>index_engine is a from-scratch equity index construction engine. It takes a universe of
+       securities and produces index membership and weights under explicit, testable rules:
+       periodic reconstitution, float-adjusted market-cap weighting, and banding/buffer rules
+       that govern how names enter and leave the index. The whole pipeline is covered by a
+       27-test pytest suite so methodology changes are caught rather than assumed.</p>
+
+    <h2>What it does</h2>
+    <h3>Reconstitution</h3>
+    <p>On a defined schedule, the engine re-ranks the universe and rebuilds membership, mirroring
+       how real index families are periodically reconstituted.</p>
+
+    <h3>Float-adjusted market-cap weighting</h3>
+    <p>Constituents are weighted by free-float-adjusted market capitalization rather than raw
+       shares outstanding, reflecting investable size.</p>
+
+    <h3>Banding &amp; buffer rules</h3>
+    <p>Membership uses hysteresis: a name has to clear an upper threshold to be added and fall
+       below a lower threshold to be removed. The buffer between those edges is what suppresses
+       churn from names hovering near the cutoff — the same idea the animation on the home page
+       visualizes.</p>
+
+    <h2>Headline finding — the banding study</h2>
+    <p>The central experiment measures how the width of the band trades off against turnover.
+       Turnover is the cost index methodology is built to manage: every add or drop is a
+       transaction the tracking funds must make.</p>
+    <div class="metric">Widening the reconstitution band from 0% to 10% cut annualized
+       one-way turnover by ~25% (relative).</div>
+    <p>That result is the README centerpiece: a wider band meaningfully reduces churn, which is
+       exactly the stability/responsiveness tradeoff an index designer has to reason about.</p>
+
+    <!-- TODO: drop in a turnover-vs-band chart screenshot here -->
+    <div class="placeholder">[ screenshot placeholder — add the turnover-vs-band chart:
+       &lt;img src="images/index-engine-banding.PNG" alt="Turnover vs. band width"&gt; ]</div>
+
+    <h2>Testing</h2>
+    <p>A 27-test pytest suite covers reconstitution logic, weighting math, and the banding
+       state machine, so the engine's behavior is pinned down rather than incidental.</p>
+
+    <h2>Resources</h2>
+    <ul>
+      <!-- TODO: replace # with the repo URL once index_engine is public -->
+      <li><a href="#" target="_blank" rel="noopener">GitHub repository</a> <span style="color:var(--faint)">(coming soon)</span></li>
+    </ul>
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/J-goroski" target="_blank" rel="noopener"><i class="fab fa-github"></i>GitHub</a>
+      <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i>LinkedIn</a>
+      <button id="email-button"><i class="fas fa-envelope"></i>Email</button>
+    </div>
+  </footer>
+
+  <div id="email-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close">&times;</span>
+      <p>Email: <span id="email-address">jared.goroski@gmail.com</span></p>
+      <button id="copy-button">Copy email</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

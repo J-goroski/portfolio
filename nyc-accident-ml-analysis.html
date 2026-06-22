@@ -1,122 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>NYC Traffic Data Analysis Project</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NYC Accident Analysis &amp; ML Prediction — Jared Goroski</title>
+  <meta name="description" content="Predicting NYC traffic-injury outcomes with linear regression, random forest, and a neural network on a 6.5M-row OpenData set.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header with interactive background and back button -->
-    <header>
-        <div class="overlay">
-            <!-- Back Button -->
-            <button onclick="window.location.href='./index.html'" class="back-button">← Back to Portfolio</button>
-            <!-- Project Title -->
-            <h1>NYC Traffic Data Analysis Project</h1>
-        </div>
-    </header>
-
-    <!-- Project Content -->
-    <main class="project-detail">
-        <p><strong>Date:</strong> April 2024</p>
-        <p><strong>Tools Used:</strong> Python, Pandas, scikit-learn, Matplotlib, Pytorch, etc.</p>
-
-        <!-- Project Overview -->
-        <section>
-            <h2>Project Overview</h2>
-            <p>
-                This project aims to analyze and predict traffic patterns in New York City using various machine learning models. The project is broken down into several stages, which include data cleaning, exploratory data analysis (EDA), and the implementation of machine learning algorithms to make predictions based on the cleaned traffic data.
-            </p>
-        </section>
-
-        <!-- Project Workflow -->
-        <section>
-            <h2>Project Workflow</h2>
-
-            <!-- Data Cleaning -->
-            <h3>Data Cleaning</h3>
-            <p>
-                The first step involves cleaning the NYC traffic dataset to handle missing values, outliers, and inconsistencies. Key techniques used include imputing missing values, removing irrelevant features, and transforming data into a usable format.
-            </p>
-            <!-- Add an image here -->
-            <img src="images/data-cleaning.PNG" alt="Data Cleaning Process">
-
-            <!-- Exploratory Data Analysis (EDA) -->
-            <h3>Exploratory Data Analysis (EDA)</h3>
-            <p>
-                EDA is used to understand the dataset and uncover patterns, correlations, and insights through visualizations and statistical analysis. This phase helps identify key traffic trends and relationships between variables such as time of day, location, weather, etc.
-            </p>
-            <!-- Add EDA visuals -->
-            <img src="images/eda-vis.PNG" alt="EDA Visualizations">
-
-            <!-- Linear Regression Model -->
-            <h3>Linear Regression Model</h3>
-            <p>
-                A linear regression model is used to establish a relationship between traffic volumes and other continuous variables. This model is useful for making simple, interpretable predictions. Key metrics like R-squared and Mean Squared Error (MSE) are used to evaluate model performance.
-            </p>
-            <!-- Add model performance chart -->
-            <img src="images/linear-regression-results.PNG" alt="Linear Regression Results">
-
-            <!-- Random Forest Model -->
-            <h3>Random Forest Model</h3>
-            <p>
-                A more complex Random Forest model is employed to capture non-linear patterns in the data and improve predictive accuracy. This model is particularly good at handling large datasets and capturing feature importance.
-            </p>
-            <!-- Add feature importance plot -->
-            <img src="images/random-forest-feature.PNG" alt="Random Forest Feature Importance">
-
-            <!-- Neural Network Model -->
-            <h3>Neural Network Model</h3>
-            <p>
-                A neural network model is developed to predict traffic flow with a more complex architecture that can capture deeper relationships within the dataset. Performance is measured using metrics like accuracy, precision, and recall.
-            </p>
-            <!-- Add neural network performance plot -->
-            <img src="images/neural-network-performance.PNG" alt="Neural Network Performance">
-        </section>
-
-        <!-- Conclusions and Findings -->
-        <section>
-            <h2>Conclusions and Findings</h2>
-            <p>
-                To predict the injury level of parties in an accident, the neural network slightly outdid the 
-                random forest model, with 85% vs. 82% accuracy, in predicting traffic accident outcomes. The neural 
-                network deep learning worked well at identifying complex patterns, while the random forest 
-                ensemble method offered robustness and visual layout . Both models could be improved by 
-                adjusting their complexity and incorporating more data. Linear regression lagged behind, showing 
-                that more sophisticated models are needed for this task
-            </p>
-        </section>
-
-        <!-- Additional Resources -->
-        <section>
-            <h2>Additional Resources</h2>
-            <ul>
-                <li><a href="https://github.com/J-goroski/NYC_Accident_prediction_and_analysis" target="_blank">GitHub Repository</a></li>
-                <li><a href="documents/nyc-traffic-data-report.pdf" target="_blank">Detailed Report (PDF)</a></li>
-            </ul>
-        </section>
-    </main>
-
-    <!-- Footer with Social Links -->
-    <footer>
-        <div class="social-links">
-            <a href="https://github.com/J-goroski" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <button id="email-button"><i class="fas fa-envelope"></i> Email</button>
-        </div>
-    </footer>
-
-    <!-- Email Pop-up Modal -->
-    <div id="email-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" aria-label="Close">&times;</span>
-            <p>My Email: <span id="email-address">jared.goroski@gmail.com</span></p>
-            <button id="copy-button">Copy Email</button>
-        </div>
+  <div class="detail-header">
+    <div class="wrap">
+      <a class="back-link" href="index.html">← Back to portfolio</a>
+      <h1>NYC Accident Analysis &amp; ML Prediction</h1>
+      <p class="detail-sub">April 2024 · Python, Pandas, scikit-learn, PyTorch, Matplotlib, Tableau</p>
     </div>
+  </div>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+  <main class="detail">
+    <h2>Overview</h2>
+    <p>This project analyzes and predicts traffic-injury outcomes in New York City using a
+       progression of machine-learning models. It runs from raw-data cleaning through
+       exploratory analysis to model comparison, with the goal of identifying high-risk
+       conditions and the factors that drive injury severity.</p>
+
+    <h2>Workflow</h2>
+
+    <h3>Data cleaning</h3>
+    <p>The NYC OpenData traffic set started at ~6.5M rows and was refined to ~850k usable
+       records — handling missing values, removing irrelevant features, and transforming
+       fields into a model-ready format.</p>
+    <img src="images/data-cleaning.PNG" alt="Data cleaning process">
+
+    <h3>Exploratory data analysis</h3>
+    <p>EDA surfaced patterns and correlations across variables such as time of day, location,
+       and conditions, establishing which features carried predictive signal.</p>
+    <img src="images/eda-vis.PNG" alt="EDA visualizations">
+
+    <h3>Linear regression</h3>
+    <p>A linear model set an interpretable baseline, evaluated with R-squared and mean
+       squared error. It lagged the ensemble and deep models, confirming the relationships
+       were not predominantly linear.</p>
+    <img src="images/linear-regression-results.PNG" alt="Linear regression results">
+
+    <h3>Random forest</h3>
+    <p>A random forest captured non-linear structure and exposed feature importance, offering
+       robustness on the large feature set.</p>
+    <img src="images/random-forest-feature.PNG" alt="Random forest feature importance">
+
+    <h3>Neural network</h3>
+    <p>A neural network modeled deeper interactions, measured on accuracy, precision, and recall.</p>
+    <img src="images/neural-network-performance.PNG" alt="Neural network performance">
+
+    <h2>Findings</h2>
+    <p>For predicting party injury level, the neural network slightly outperformed the random
+       forest — 85% vs. 82% accuracy. The network was stronger at complex patterns while the
+       forest offered robustness and interpretability; linear regression trailed both,
+       reinforcing that the task rewards more expressive models. Both top models have headroom
+       with more data and tuning.</p>
+
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="https://github.com/J-goroski/NYC_Accident_prediction_and_analysis" target="_blank" rel="noopener">GitHub repository</a></li>
+      <li><a href="documents/nyc-traffic-data-report.pdf" target="_blank" rel="noopener">Detailed report (PDF)</a></li>
+    </ul>
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/J-goroski" target="_blank" rel="noopener"><i class="fab fa-github"></i>GitHub</a>
+      <a href="https://www.linkedin.com/in/jaredgoroski/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i>LinkedIn</a>
+      <button id="email-button"><i class="fas fa-envelope"></i>Email</button>
+    </div>
+  </footer>
+
+  <div id="email-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Close">&times;</span>
+      <p>Email: <span id="email-address">jared.goroski@gmail.com</span></p>
+      <button id="copy-button">Copy email</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
