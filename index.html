@@ -10,25 +10,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script>(function(){try{var t=localStorage.getItem("theme");if(!t){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 </head>
 <body>
   <!-- ============ HERO: index-constituent field ============ -->
   <header class="hero">
     <canvas id="indexCanvas"></canvas>
-    <div class="legend" aria-hidden="true">
-      <span><span class="dot in"></span> in index</span>
-      <span><span class="dot out"></span> out</span>
-    </div>
     <div class="hero-inner">
       <p class="eyebrow">Data Scientist · FTSE Russell / LSEG</p>
       <h1>Jared Goroski</h1>
-      <p class="lede">I build and maintain the data behind equity indices — methodology,
-        reference data, and the pipelines that keep a multi-thousand-name universe accurate.</p>
-      <div class="hero-meta">
-        <span><b>~5,600</b> monitored equities</span>
-        <span><b>~70,000</b> reference universe</span>
-        <span><b>FTSE Russell</b> equity index data team</span>
-      </div>
+      <p class="lede">I build, maintain, and improve the data behind equity indices —
+        methodology, reference data, and the pipelines and processes that keep universes
+        in the multi-thousands maintained and up to date.</p>
     </div>
   </header>
 
@@ -41,11 +34,15 @@
         London Stock Exchange Group, working on index methodology, reference-data automation,
         and multi-vendor data validation across the Russell equity universe. Day to day that
         means maintaining researched attributes and index factors, rebuilding monthly
-        maintenance processes, and improving how a large equity universe is queried and kept clean.</p>
-      <p>Outside of work I build <strong>production-grade financial-data systems</strong> — a
-        rules-based index construction engine, SEC EDGAR/XBRL ingestion pipelines, and local
-        LLM tooling for filing extraction. I favor offline-first, reproducible, well-tested
-        systems over anything that only runs once.</p>
+        maintenance processes, and improving how a large equity universe is queried and kept
+        clean — refining how review and maintenance get done to raise quality, widen scope,
+        push automation further, and cut manual review time.</p>
+      <p>Outside of work I'm broadening my financial knowledge beyond equities toward the
+        <strong>other side of finance</strong>, building automated research tooling around
+        local LLMs — training and fine-tuning them into credible reviewers. I enjoy working on
+        small, well-maintained pipelines and SQL databases like SQLite, building toward trusted
+        datasets and attributes drawn from APIs, exchanges, and government reporting — along with
+        the steady quality improvements that hold it all together.</p>
     </section>
 
     <!-- ============ PROJECTS ============ -->
