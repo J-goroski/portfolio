@@ -20,6 +20,20 @@
   --r: 10px;
 }
 
+/* ---------- light theme ---------- */
+[data-theme="light"] {
+  --bg:        #F6F7F9;  /* soft off-white */
+  --surface:   #FFFFFF;  /* panels */
+  --surface-2: #EDF0F5;  /* raised panels / hover */
+  --border:    #D9DEE8;  /* hairlines */
+  --text:      #161C28;  /* primary */
+  --muted:     #54607A;  /* secondary */
+  --faint:     #97A0B2;  /* tertiary */
+  --accent:    #B5760F;  /* deeper amber — readable on light */
+  --accent-dim:#9A7320;
+  --link:      #2A5FC4;  /* interactive text */
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -93,6 +107,13 @@ h2.section-title {
     rgba(11,14,20,0.10) 40%,
     rgba(11,14,20,0.82) 100%);
   pointer-events: none;
+}
+
+[data-theme="light"] .hero::after {
+  background: linear-gradient(180deg,
+    rgba(246,247,249,0.25) 0%,
+    rgba(246,247,249,0.04) 40%,
+    rgba(246,247,249,0.88) 100%);
 }
 
 .hero-inner {
@@ -393,3 +414,35 @@ a:focus-visible, button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* ============================================================
+   THEME TOGGLE (fixed, bottom-left)
+   ============================================================ */
+.theme-toggle {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 900;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.22);
+  transition: color 0.2s ease, border-color 0.2s ease,
+              background 0.2s ease, transform 0.2s ease;
+}
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+[data-theme="light"] .theme-toggle { box-shadow: 0 2px 12px rgba(20,28,40,0.12); }
+[data-theme="light"] ::selection { background: var(--accent); color: #fff; }
