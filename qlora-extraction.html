@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>index_engine — Jared Goroski</title>
-  <meta name="description" content="A rules-based equity index construction engine: reconstitution, float-adjusted market-cap weighting, and banding/buffer rules, with a banding turnover study.">
+  <title>LLM Filing Extraction (QLoRA) — Jared Goroski</title>
+  <meta name="description" content="QLoRA fine-tuning of Qwen2.5-7B with Unsloth for structured field extraction from SEC 10-K filings, exported to GGUF for local Ollama inference.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,56 +16,47 @@
   <div class="detail-header">
     <div class="wrap">
       <a class="back-link" href="index.html">← Back to portfolio</a>
-      <h1>index_engine</h1>
-      <p class="detail-sub">Rules-based equity index engine · Python, pytest</p>
+      <h1>LLM Filing Extraction (QLoRA)</h1>
+      <p class="detail-sub">ML / LLM · Python, Unsloth, Ollama</p>
     </div>
   </div>
 
   <main class="detail">
     <h2>Overview</h2>
-    <p>index_engine is a from-scratch equity index construction engine. It takes a universe of
-       securities and produces index membership and weights under explicit, testable rules:
-       periodic reconstitution, float-adjusted market-cap weighting, and banding/buffer rules
-       that govern how names enter and leave the index. The whole pipeline is covered by a
-       17-test pytest suite so methodology changes are caught rather than assumed.</p>
+    <p>A fine-tuning pipeline that adapts a small open model to pull structured fields out of
+       SEC 10-K filings. It fine-tunes Qwen2.5-7B with QLoRA (via Unsloth) and exports the result
+       to GGUF so it runs locally through Ollama — keeping the whole extraction workflow
+       offline and self-hosted.</p>
 
-    <h2>What it does</h2>
-    <h3>Reconstitution</h3>
-    <p>On a defined schedule, the engine re-ranks the universe and rebuilds membership, mirroring
-       how real index families are periodically reconstituted.</p>
+    <h2>Pipeline</h2>
+    <h3>Data &amp; sync</h3>
+    <p>Built on an existing EDGAR sync module that retrieves and stages 10-K filings, providing
+       the source text the model learns to extract from.</p>
 
-    <h3>Float-adjusted market-cap weighting</h3>
-    <p>Constituents are weighted by free-float-adjusted market capitalization rather than raw
-       shares outstanding, reflecting investable size.</p>
+    <h3>QLoRA fine-tuning</h3>
+    <p>Quantized low-rank adaptation (QLoRA) makes it possible to fine-tune a 7B model on modest
+       hardware by training small adapter weights over a quantized base — Unsloth handles the
+       training loop efficiently.</p>
 
-    <h3>Banding &amp; buffer rules</h3>
-    <p>Membership uses hysteresis: a name has to clear an upper threshold to be added and fall
-       below a lower threshold to be removed. The buffer between those edges is what suppresses
-       churn from names hovering near the cutoff — the same idea the animation on the home page
-       visualizes.</p>
-
-    <h2>Headline finding — the banding study</h2>
-    <p>The central experiment measures how the width of the band trades off against turnover.
-       Turnover is the cost index methodology is built to manage: every add or drop is a
-       transaction the tracking funds must make.</p>
-    <div class="metric">Widening the reconstitution band from 0% to 10% cut one-way turnover
-       from 5.0% to 1.6% in a synthetic study — roughly a two-thirds reduction.</div>
-    <p>That result is the README centerpiece: a wider band meaningfully reduces churn, which is
-       exactly the stability/responsiveness tradeoff an index designer has to reason about.</p>
+    <h3>Local export &amp; inference</h3>
+    <p>The tuned model is exported to GGUF and served through Ollama, so structured extraction
+       runs entirely on local infrastructure with no external API calls.</p>
 
     <figure class="shot">
-      <img src="images/index-engine-banding.png" alt="One-way reconstitution turnover falling as the band width widens">
-      <figcaption>Turnover vs. band width, produced by running the real ranking engine over a synthetic universe across band settings.</figcaption>
+      <img src="images/llm-pipeline-flow.png" alt="Pipeline flow: EDGAR filings, extraction, dataset, QLoRA training, GGUF/Ollama, evaluation">
+      <figcaption>End-to-end flow. The amber stages run offline (extraction, dataset building); training and base-vs-fine-tune evaluation run on a GPU / local Ollama.</figcaption>
     </figure>
 
-    <h2>Testing</h2>
-    <p>A 17-test pytest suite covers reconstitution logic, weighting math, and the banding
-       state machine, so the engine's behavior is pinned down rather than incidental.</p>
+    <h2>Why it matters</h2>
+    <p>It's the same extraction problem that sits under reference-data intake — turning
+       unstructured filings into structured fields — approached as a self-hosted, reproducible
+       model rather than a paid API dependency. The emphasis is the evaluation: proving a
+       fine-tune <em>measurably</em> improves a narrow, checkable task.</p>
 
     <h2>Resources</h2>
     <ul>
-      <li><a href="https://github.com/J-goroski/Experimental-index-engine" target="_blank" rel="noopener">GitHub repository</a></li>
-      <li><a href="documents/index-engine-methodology-report.pdf" target="_blank" rel="noopener">Methodology &amp; banding study (PDF)</a> — the construction process end to end, plus the turnover study.</li>
+      <li><a href="https://github.com/J-goroski/Local-LLM-Filing-Extraction" target="_blank" rel="noopener">GitHub repository</a></li>
+      <li><a href="documents/llm-filing-extraction-report.pdf" target="_blank" rel="noopener">Pipeline report (PDF)</a> — extraction, dataset composition, sample training examples, and the evaluation methodology.</li>
     </ul>
   </main>
 

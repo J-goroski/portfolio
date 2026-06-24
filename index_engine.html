@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jared Goroski — Data Scientist, FTSE Russell / LSEG</title>
-  <meta name="description" content="Data scientist on FTSE Russell's equity index data team. Index methodology, reference-data automation, and financial-data engineering — SEC EDGAR/XBRL, a rules-based index engine, and local LLM tooling.">
+  <title>index_engine — Jared Goroski</title>
+  <meta name="description" content="A rules-based equity index construction engine: reconstitution, float-adjusted market-cap weighting, and banding/buffer rules, with a banding turnover study.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -13,178 +13,62 @@
   <script>(function(){try{var t=localStorage.getItem("theme");if(!t){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 </head>
 <body>
-  <!-- ============ HERO: index-constituent field ============ -->
-  <header class="hero">
-    <canvas id="indexCanvas"></canvas>
-    <div class="hero-inner">
-      <p class="eyebrow">Data Scientist · FTSE Russell / LSEG</p>
-      <h1>Jared Goroski</h1>
-      <p class="lede">I build, maintain, and improve the data behind equity indices —
-        methodology, reference data, and the pipelines and processes that keep universes
-        in the multi-thousands maintained and up to date.</p>
+  <div class="detail-header">
+    <div class="wrap">
+      <a class="back-link" href="index.html">← Back to portfolio</a>
+      <h1>index_engine</h1>
+      <p class="detail-sub">Rules-based equity index engine · Python, pytest</p>
     </div>
-  </header>
+  </div>
 
-  <main class="wrap">
-    <!-- ============ ABOUT ============ -->
-    <section class="about" id="about">
-      <p class="eyebrow">About</p>
-      <h2 class="section-title">What I work on</h2>
-      <p>I'm a data scientist on <strong>FTSE Russell's equity index data team</strong> at the
-        London Stock Exchange Group, working on index methodology, reference-data automation,
-        and multi-vendor data validation across the Russell equity universe. Day to day that
-        means maintaining researched attributes and index factors, rebuilding monthly
-        maintenance processes, and improving how a large equity universe is queried and kept
-        clean — refining how review and maintenance get done to raise quality, widen scope,
-        push automation further, and cut manual review time.</p>
-      <p>Outside of work I'm broadening my financial knowledge beyond equities toward the
-        <strong>other side of finance</strong>, building automated research tooling around
-        local LLMs — training and fine-tuning them into credible reviewers. I enjoy working on
-        small, well-maintained pipelines and SQL databases like SQLite, building toward trusted
-        datasets and attributes drawn from APIs, exchanges, and government reporting — along with
-        the steady quality improvements that hold it all together.</p>
-    </section>
+  <main class="detail">
+    <h2>Overview</h2>
+    <p>index_engine is a from-scratch equity index construction engine. It takes a universe of
+       securities and produces index membership and weights under explicit, testable rules:
+       periodic reconstitution, float-adjusted market-cap weighting, and banding/buffer rules
+       that govern how names enter and leave the index. The whole pipeline is covered by a
+       17-test pytest suite so methodology changes are caught rather than assumed.</p>
 
-    <!-- ============ PROJECTS ============ -->
-    <section class="projects" id="projects">
-      <p class="eyebrow">Projects</p>
-      <h2 class="section-title">Selected work</h2>
-      <div class="project-grid">
+    <h2>What it does</h2>
+    <h3>Reconstitution</h3>
+    <p>On a defined schedule, the engine re-ranks the universe and rebuilds membership, mirroring
+       how real index families are periodically reconstituted.</p>
 
-        <!-- index_engine -->
-        <article class="card">
-          <p class="card-eyebrow">Index methodology</p>
-          <h3><a href="index_engine.html">index_engine</a></h3>
-          <p>A configurable equity index construction &amp; reconstitution engine: eligibility
-             screening, market-cap ranking, float-adjusted weighting, and banding/buffer rules,
-             validated by a 17-test suite. A banding study quantifies the turnover/stability
-             tradeoff that index methodology exists to manage.</p>
-          <div class="metric">Widening the reconstitution band 0% → 10% cut one-way turnover
-             from 5.0% to 1.6% in a synthetic study — roughly a two-thirds reduction.</div>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">pytest</span>
-            <span class="tag">index methodology</span>
-          </div>
-          <a class="card-link" href="index_engine.html">View details →</a>
-        </article>
+    <h3>Float-adjusted market-cap weighting</h3>
+    <p>Constituents are weighted by free-float-adjusted market capitalization rather than raw
+       shares outstanding, reflecting investable size.</p>
 
-        <!-- US Equities Pipelines and Consolidation -->
-        <article class="card">
-          <p class="card-eyebrow">Financial-data engineering</p>
-          <h3><a href="sec-xbrl-pipeline.html">US Equities Pipelines and Consolidation</a></h3>
-          <p>A medallion-architecture (Bronze / Silver / Gold) pipeline that consolidates the US
-             listing universe across sources: dual-vendor EOD pricing, OpenFIGI identifier
-             crosswalk, a SEC filing index, and XBRL company facts — offline-first in SQLite,
-             with 267 network-free tests.</p>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">SQLite</span>
-            <span class="tag">SEC EDGAR</span>
-            <span class="tag">OpenFIGI</span>
-          </div>
-          <a class="card-link" href="sec-xbrl-pipeline.html">View details →</a>
-        </article>
+    <h3>Banding &amp; buffer rules</h3>
+    <p>Membership uses hysteresis: a name has to clear an upper threshold to be added and fall
+       below a lower threshold to be removed. The buffer between those edges is what suppresses
+       churn from names hovering near the cutoff — the same idea the animation on the home page
+       visualizes.</p>
 
-        <!-- QLoRA extraction -->
-        <article class="card">
-          <p class="card-eyebrow">ML / LLM</p>
-          <h3><a href="qlora-extraction.html">LLM Filing Extraction (QLoRA)</a></h3>
-          <p>A reproducible QLoRA fine-tuning <em>and evaluation</em> pipeline for structured
-             field extraction from SEC 10-K filings: Qwen2.5-7B + Unsloth, exported to GGUF for
-             local Ollama inference, with programmatically-labelled datasets and a base-vs-fine-tune
-             eval harness.</p>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">QLoRA</span>
-            <span class="tag">Unsloth</span>
-            <span class="tag">Ollama</span>
-          </div>
-          <a class="card-link" href="qlora-extraction.html">View details →</a>
-        </article>
+    <h2>Headline finding — the banding study</h2>
+    <p>The central experiment measures how the width of the band trades off against turnover.
+       Turnover is the cost index methodology is built to manage: every add or drop is a
+       transaction the tracking funds must make.</p>
+    <div class="metric">Widening the reconstitution band from 0% to 10% cut one-way turnover
+       from 5.0% to 1.6% in a synthetic study — roughly a two-thirds reduction.</div>
+    <p>That result is the README centerpiece: a wider band meaningfully reduces churn, which is
+       exactly the stability/responsiveness tradeoff an index designer has to reason about.</p>
 
-        <!-- NYC accident analysis (kept) -->
-        <article class="card">
-          <p class="card-eyebrow">Machine learning</p>
-          <h3><a href="nyc-accident-ml-analysis.html">NYC Accident Analysis &amp; ML Prediction</a></h3>
-          <p>Predicting traffic-injury outcomes on a 6.5M-row NYC OpenData set (refined to
-             850k). Compared linear regression, random forest, and a neural network — the
-             network edged out the forest at 85% vs. 82% accuracy.</p>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">scikit-learn</span>
-            <span class="tag">PyTorch</span>
-            <span class="tag">Tableau</span>
-          </div>
-          <a class="card-link" href="nyc-accident-ml-analysis.html">View details →</a>
-        </article>
+    <figure class="shot">
+      <img src="images/index-engine-banding.png" alt="One-way reconstitution turnover falling as the band width widens">
+      <figcaption>Turnover vs. band width, produced by running the real ranking engine over a synthetic universe across band settings.</figcaption>
+    </figure>
 
-      </div>
-    </section>
+    <h2>Testing</h2>
+    <p>A 17-test pytest suite covers reconstitution logic, weighting math, and the banding
+       state machine, so the engine's behavior is pinned down rather than incidental.</p>
 
-    <!-- ============ SKILLS ============ -->
-    <section class="skills" id="skills">
-      <p class="eyebrow">Skills</p>
-      <h2 class="section-title">Tools &amp; domains</h2>
-
-      <div class="skill-cluster">
-        <h3>Financial Data &amp; Indices</h3>
-        <div class="chips">
-          <span class="chip">Equity index data</span>
-          <span class="chip">FTSE Russell methodology</span>
-          <span class="chip">Float-adjusted market-cap weighting</span>
-          <span class="chip">Index reconstitution</span>
-          <span class="chip">Banding / buffer rules</span>
-          <span class="chip">Reference data</span>
-          <span class="chip">Free float</span>
-          <span class="chip">Multi-vendor validation</span>
-          <span class="chip">SEC EDGAR / XBRL</span>
-          <span class="chip">CIK / CUSIP / ISIN / FIGI</span>
-        </div>
-      </div>
-
-      <div class="skill-cluster">
-        <h3>Data Engineering</h3>
-        <div class="chips">
-          <span class="chip">MSSQL</span>
-          <span class="chip">Medallion architecture</span>
-          <span class="chip">ETL pipelines</span>
-          <span class="chip">Web scraping</span>
-          <span class="chip">Vendor APIs</span>
-          <span class="chip">PySpark</span>
-          <span class="chip">Data quality &amp; validation</span>
-        </div>
-      </div>
-
-      <div class="skill-cluster">
-        <h3>ML / LLM</h3>
-        <div class="chips">
-          <span class="chip">PyTorch</span>
-          <span class="chip">QLoRA fine-tuning</span>
-          <span class="chip">Unsloth</span>
-          <span class="chip">Ollama</span>
-          <span class="chip">Structured extraction</span>
-        </div>
-      </div>
-
-      <div class="skill-cluster">
-        <h3>Languages &amp; Tools</h3>
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">SQL</span>
-          <span class="chip">R</span>
-          <span class="chip">C++</span>
-          <span class="chip">Java</span>
-          <span class="chip">JavaScript</span>
-          <span class="chip">Git</span>
-          <span class="chip">PowerApps</span>
-          <span class="chip">Tableau</span>
-        </div>
-      </div>
-    </section>
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="https://github.com/J-goroski/Experimental-index-engine" target="_blank" rel="noopener">GitHub repository</a></li>
+      <li><a href="documents/index-engine-methodology-report.pdf" target="_blank" rel="noopener">Methodology &amp; banding study (PDF)</a> — the construction process end to end, plus the turnover study.</li>
+    </ul>
   </main>
 
-  <!-- ============ FOOTER ============ -->
   <footer>
     <div class="social-links">
       <a href="https://github.com/J-goroski" target="_blank" rel="noopener"><i class="fab fa-github"></i>GitHub</a>
@@ -193,7 +77,6 @@
     </div>
   </footer>
 
-  <!-- email modal -->
   <div id="email-modal" class="modal">
     <div class="modal-content">
       <span class="close-button" aria-label="Close">&times;</span>
